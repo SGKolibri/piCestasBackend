@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Pessoas que vão receber as cestas
+model User {
+  id                      String   @id @default(cuid())
+  nome                    String
+  justificativa           String 
+  dataInicioColeta        DateTime @default(now())
+  dataVencimentoProtocolo DateTime @default(now())
+  statusColeta            String
+  cesta                   Cesta[]
+  doacao                  Doacao[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Cesta que vai ser enviada
+model Cesta {
+  id             String   @id @default(cuid())
+  category       String
+  deliveryDate   DateTime 
+  deliveryStatus Status   @default(pendente) // default da entrega é 'Pendente'
+  quantity       Int
+  price          Float
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Compra que vai ser feita
+model Compra {
+  id          String   @id @default(cuid())
+  dataCompra  DateTime @default(now())
+  fornecedor  String
+  quantidade  Int
+  valor       Float
+  comprovante String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Doação que vai ser feita para uma pessoa 
+model Doacao {
+  id             String   @id @default(cuid())
+  dataValidade   DateTime @default(now())
+  dataDoacao     DateTime @default(now())
+  categoria      String
+  destinatario   User     @relation(fields: [destinatarioId], references: [id])
+  destinatarioId String
+}
+
+enum Status {
+  pendente
+  entregue
+  cancelado
+}
+
+//Resumo das Relações
+// User está relacionado a Cesta (um usuário pode receber várias cestas).
+// Compra está relacionado a Cesta (uma compra pode fornecer várias cestas).
+// Cesta serve como a ponte entre as pessoas cadastradas e as compras realizadas.
+
+// Tabelas Resultantes
+// Pessoas cadastradas: Representadas pelo modelo User.
+// Compra de cestas: Representada pelo novo modelo Compra.
+// Cestas entregues: Representadas pelo modelo Cesta, contendo informações detalhadas como status, data de entrega e vínculo com User e CompraCesta.
