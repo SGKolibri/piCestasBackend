@@ -40,19 +40,3 @@ npm run dev
 para acessar a aplicação, acesse o endereço `http://localhost:5050` no seu navegador.
 
 para ver as documentações da API, acesse o endereço `http://localhost:5050/docs` no seu navegador.
-
-# Fluxo do sistema
-
-1. Cadastro de Pessoas (User):
-
-- Todas as pessoas que podem receber cestas devem ser cadastradas no sistema primeiro
-
-2. Criação de Cestas (Cesta):
-
-- As cestas são criadas individualmente e associadas a pessoas (User).
-
-3. Registro de Compras (Compra):
-
-- As compras são registradas para documentar o fornecedor, a quantidade adquirida, e o custo.
-- Associa cestas já existentes à compra.
-- Caso a cesta não exista, permite criá-la diretamente durante o registro da compra.
