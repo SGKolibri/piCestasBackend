@@ -1,12 +1,12 @@
-aplicação feita com Node.js, TypeScript, Fastify, Prisma ORM, PostgreSQL e Docker.
+# Aplicação backend feita com Node.js, TypeScript, Fastify, Prisma ORM, PostgreSQL e Docker.
 
-# Instalação
+## Instalação
 
 ```bash
 npm install
 ```
 
-# Configuração
+## Configuração
 
 1. Crie um arquivo `.env` na raiz do projeto e adicione as seguintes variáveis de ambiente:
 
@@ -31,7 +31,7 @@ npx prisma migrate dev
 npx prisma generate
 ```
 
-# Execução
+## Execução
 
 ```bash
 npm run dev
