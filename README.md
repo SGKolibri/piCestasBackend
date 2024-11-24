@@ -1,4 +1,4 @@
-# Aplicação backend feita com Node.js, TypeScript, Fastify, Prisma ORM, PostgreSQL e Docker.
+## Aplicação backend feita com Node.js, TypeScript, Fastify, Prisma ORM, PostgreSQL e Docker.
 
 ## Instalação
 
